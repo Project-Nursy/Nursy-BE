@@ -3,6 +3,7 @@ package com.nursy.nursy.domain.entity;
 import com.nursy.nursy.domain.Role;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -24,7 +25,8 @@ public class User {
     private String password;
     private String sex;
     private String phoneNum;
-    private LocalDateTime birth;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate birth;
     private String email;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
@@ -39,5 +41,4 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Ward> wards;
 
-    // Getters and Setters
 }
