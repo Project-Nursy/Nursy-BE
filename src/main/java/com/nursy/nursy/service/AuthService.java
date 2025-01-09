@@ -1,17 +1,26 @@
 package com.nursy.nursy.service;
 
 import com.nursy.nursy.domain.dto.join.JoinRequest;
+import com.nursy.nursy.domain.dto.login.LoginRequest;
 import com.nursy.nursy.domain.entity.User;
+import com.nursy.nursy.jwt.JwtToken;
+import com.nursy.nursy.jwt.JwtTokenUtil;
 import com.nursy.nursy.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class AuthService {
-    private final PasswordEncoder passwordEncoder;
+
+    private final BCryptPasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
+    private final JwtTokenUtil jwtTokenUtil;
+
     public User signUp(JoinRequest joinRequest) {
         User user = User.builder()
                 .userIdentifier(joinRequest.getUserIdentifier())
@@ -25,5 +34,20 @@ public class AuthService {
         userRepository.save(user);
 
         return user;
+    }
+    public JwtToken login(LoginRequest loginRequest) {
+        Optional<User> optionalUser = userRepository.findByUserIdentifier(loginRequest.getUserIdentifier());
+        if (optionalUser.isEmpty()) {
+            return null;
+        }
+        User user = optionalUser.get();
+        if (!passwordEncoder.matches(loginRequest.getPassword(), user.getPassword())) {
+            return null;
+        }
+
+        String accessToken = jwtTokenUtil.createAccessToken(user.getUserIdentifier());
+        String refreshToken = jwtTokenUtil.createRefreshToken(user.getUserIdentifier());
+
+        return new JwtToken(accessToken, refreshToken);
     }
 }
