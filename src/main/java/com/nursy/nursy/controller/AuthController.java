@@ -7,10 +7,8 @@ import com.nursy.nursy.jwt.JwtToken;
 import com.nursy.nursy.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -36,6 +34,10 @@ public class AuthController {
         JwtToken jwtToken = authService.login(loginRequest);
 
         return ResponseEntity.status(200).body(jwtToken);
+    }
+    @GetMapping("/test")
+    public ResponseEntity<?> test(Authentication authentication) {
+        return ResponseEntity.ok(authentication);
     }
 
 
