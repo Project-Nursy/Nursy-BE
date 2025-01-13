@@ -3,6 +3,7 @@ package com.nursy.nursy.domain.entity;
 import com.nursy.nursy.domain.Role;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
@@ -40,5 +41,12 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<Ward> wards;
+    @PrePersist
+    public void prePersist() {
+        if (this.role == null) {
+            this.role = Role.ROLE_USER;
+        }
+        this.createdAt = LocalDateTime.now();
+    }
 
 }
