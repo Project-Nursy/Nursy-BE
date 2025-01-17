@@ -9,6 +9,7 @@ import com.nursy.nursy.service.AuthService;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -36,6 +37,12 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
         JwtToken jwtToken = authService.login(loginRequest);
+        if(jwtToken==null){
+            //Map<String, String> response = new HashMap<>();
+            //response.put("error", "Invalid username or password");
+            //return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("아이디및 비밀번호를 체크해주세요");
+        }
         AccessTokenResponseDto accessTokenResponseDto = new AccessTokenResponseDto();
         accessTokenResponseDto.setAccessToken(jwtToken.getAccessToken());
 
@@ -70,6 +77,5 @@ public class AuthController {
     public ResponseEntity<?> test(Authentication authentication) {
         return ResponseEntity.ok(authentication);
     }
-
 
 }
