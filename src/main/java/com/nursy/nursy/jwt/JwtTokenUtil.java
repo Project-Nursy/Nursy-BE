@@ -21,10 +21,11 @@ public class JwtTokenUtil {
     @Value("${jwt.expire.refresh}")
     private Long refreshTokenExpireMs;
     //토큰발급
-    public String createToken(String userIdentifier,String role,String type ,Long expireTimeMs){
+    public String createToken(String uuid,String userName,String role,String type ,Long expireTimeMs){
         Claims claims = Jwts.claims();
         //claims.put("userId", user.getCno().toString());
-        claims.put("userId", userIdentifier);
+        claims.put("userId", uuid);
+        claims.put("userName", userName);
         claims.put("role",role);
         return Jwts.builder()
                 .setHeaderParam("typ", type)
@@ -34,15 +35,18 @@ public class JwtTokenUtil {
                 .signWith(SignatureAlgorithm.HS256,secret)
                 .compact();
     }
-    public String createAccessToken(String userIdentifier,String role){
-        return createToken(userIdentifier,role,"access",accessTokenExpireMs);
+    public String createAccessToken(String uuid,String userName,String role){
+        return createToken(uuid,userName,role,"access",accessTokenExpireMs);
     }
-    public String createRefreshToken(String userIdentifier,String role){
-        return createToken(userIdentifier,role,"refresh",refreshTokenExpireMs);
+    public String createRefreshToken(String uuid,String userName,String role){
+        return createToken(uuid,userName,role,"refresh",refreshTokenExpireMs);
     }
 
     public String getUserId(String token){
         return extractClaims(token).get("userId",String.class);
+    }
+    public String getUserName(String token){
+        return extractClaims(token).get("userName",String.class);
     }
     public String getUserRole(String token){
         return extractClaims(token).get("role",String.class);

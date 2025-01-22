@@ -34,9 +34,10 @@ public class JwtTokenFilter extends OncePerRequestFilter {
                 if (refreshToken != null && !jwtTokenUtil.isExpired(refreshToken)) {
                     String userId = jwtTokenUtil.getUserId(refreshToken);
                     String role = jwtTokenUtil.getUserRole(refreshToken);
+                    String userName = jwtTokenUtil.getUserName(refreshToken);
                     //UserDetails userDetails = userDetailsService.loadUserByUsername(userId);
 
-                    String newAccessToken = jwtTokenUtil.createAccessToken(userId,role);
+                    String newAccessToken = jwtTokenUtil.createAccessToken(userId,userName,role);
                     setJsonResponseWithNewToken(response, newAccessToken);
 
 //                    response.setHeader("Authorization", "Bearer " + newAccessToken);
@@ -51,9 +52,11 @@ public class JwtTokenFilter extends OncePerRequestFilter {
             } else {
                 String userId = jwtTokenUtil.getUserId(token);
                 String userRole = jwtTokenUtil.getUserRole(token);
+                String userName = jwtTokenUtil.getUserName(token);
 
-                UserDetails userDetails = userDetailsService.loadUserByUsername(userId);
+                //UserDetails userDetails = userDetailsService.loadUserByUsername(userId);
 
+                UserDetails userDetails = new CustomUserDetails(userId,userName);
                 UsernamePasswordAuthenticationToken authenticationToken =
                         new UsernamePasswordAuthenticationToken(userDetails, null, List.of(new SimpleGrantedAuthority(userRole)));
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
