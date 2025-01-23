@@ -40,14 +40,17 @@ public class AuthService {
         if (optionalUser.isEmpty()) {
             return null;
         }
+
         User user = optionalUser.get();
+
         if (!passwordEncoder.matches(loginRequest.getPassword(), user.getPassword())) {
             return null;
         }
 
-        String accessToken = jwtTokenUtil.createAccessToken(user.getUserIdentifier());
-        String refreshToken = jwtTokenUtil.createRefreshToken(user.getUserIdentifier());
+        String accessToken = jwtTokenUtil.createAccessToken(user.getId(),user.getName(),user.getRole().toString());
+        String refreshToken = jwtTokenUtil.createRefreshToken(user.getId(), user.getName(), user.getRole().toString());
 
-        return new JwtToken(accessToken, refreshToken);
+
+        return new JwtToken(accessToken,refreshToken);
     }
 }

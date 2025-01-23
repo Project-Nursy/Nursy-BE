@@ -15,10 +15,12 @@ public class CustomUserDetails implements UserDetails {
 //    public CustomUserDetails(User user) {
 //        this.user = user;
 //    }
-    private String identifier;
+    private String uuid;
+    private String userName;
 
-    public CustomUserDetails(String identifier) {
-        this.identifier = identifier;
+    public CustomUserDetails(String uuid,String userName) {
+        this.uuid = uuid;
+        this.userName = userName;
     }
 
     @Override
@@ -33,7 +35,10 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public String getUsername() {
-        return identifier;
+        return uuid;
+    }
+    public String getDisplayUserName(){
+        return userName;
     }
 
     @Override
