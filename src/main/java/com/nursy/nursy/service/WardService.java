@@ -2,6 +2,7 @@ package com.nursy.nursy.service;
 
 import com.nursy.nursy.domain.dto.ward.WardAddRequestDto;
 import com.nursy.nursy.domain.dto.ward.WardResponseDto;
+import com.nursy.nursy.domain.dto.ward.WardUpdateRequestDto;
 import com.nursy.nursy.domain.entity.User;
 import com.nursy.nursy.domain.entity.Ward;
 import com.nursy.nursy.repository.UserRepository;
@@ -30,6 +31,25 @@ public class WardService {
                 .build();
         wardRepository.save(ward);
 
+    }
+    public void deleteWard(Authentication authentication, Long wardId) {
+        Optional<User> userOptional = userRepository.findById(authentication.getName());
+
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            wardRepository.deleteByUserIdAndWardId(user.getId(), wardId);
+        }
+    }
+    public void updateWard(Authentication authentication, WardUpdateRequestDto wardUpdateRequestDto) {
+        Optional<User> userOptional = userRepository.findById(authentication.getName());//uuid
+        Ward ward = Ward.builder()
+                .wardId(wardUpdateRequestDto.getWardId())
+                .wardName(wardUpdateRequestDto.getWardName())
+                .hospitalName(wardUpdateRequestDto.getHospitalName())
+                .location(wardUpdateRequestDto.getLocation())
+                .user(userOptional.get())
+                .build();
+        wardRepository.save(ward);
     }
 
     public List<WardResponseDto> getWardByUserId(String userId) {

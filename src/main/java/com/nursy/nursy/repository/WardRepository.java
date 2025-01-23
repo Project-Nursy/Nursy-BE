@@ -9,4 +9,6 @@ import java.util.Optional;
 
 public interface WardRepository extends JpaRepository<Ward,Long> {
     Optional<List<Ward>> findByUserId(String userId);
+
+    void deleteByUserIdAndWardId(String userId, Long wardId);
 }
