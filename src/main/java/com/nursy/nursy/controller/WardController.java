@@ -7,6 +7,7 @@ import com.nursy.nursy.service.WardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,24 +19,25 @@ public class WardController {
 
     private final WardService wardService;
 
-    @GetMapping("/ward-list")
+    @GetMapping("/list")
     public ResponseEntity<?> getWardList(Authentication authentication){
         String userId = authentication.getName();
         List<WardResponseDto> wardList = wardService.getWardByUserId(userId);
         return ResponseEntity.ok(wardList);
     }
-
-    @PostMapping("/ward-add")
+    @Transactional
+    @PostMapping("/add")
     public void addWard(Authentication authentication, @RequestBody WardAddRequestDto wardAddRequestDto){
         wardService.saveWard(authentication,wardAddRequestDto);
     }
-
-    @PutMapping("/ward-update")
+    @Transactional
+    @PatchMapping("/update")
     public void updateWard(Authentication authentication, @RequestBody WardUpdateRequestDto wardUpdateRequestDto){
         wardService.updateWard(authentication,wardUpdateRequestDto);
     }
 
-    @DeleteMapping("/ward-delete/{wardId}")
+    @Transactional
+    @DeleteMapping("/delete/{wardId}")
     public void deleteWard(Authentication authentication, @PathVariable Long wardId){
         wardService.deleteWard(authentication,wardId);
     }
