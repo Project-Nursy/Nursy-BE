@@ -1,5 +1,6 @@
 package com.nursy.nursy.domain.entity;
 
+import com.nursy.nursy.domain.Role;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,7 +21,7 @@ public class Nurse {
     private Ward ward;
 
     private String name;
-    private LocalDateTime date;
+    private LocalDateTime createdAt;//생성시간
     private Long level;
 
     @Column(columnDefinition = "varchar(255) default '0'")
@@ -47,4 +48,8 @@ public class Nurse {
     @OneToOne(mappedBy = "nurse")
     private WorkCount workCount;
 
+    @PrePersist
+    public void prePersist() {
+        this.createdAt = LocalDateTime.now();
+    }
 }

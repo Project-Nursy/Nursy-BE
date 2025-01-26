@@ -26,6 +26,14 @@ public class JwtTokenFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
 
+        String path = request.getServletPath();
+
+        // 특정 경로는 필터 제외 (예: 로그인, 회원가입)
+        if (path.equals("/api/auth/login") || path.equals("/api/auth/join")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
         String token = getTokenFromRequest(request);
         if (token != null) {
             if (jwtTokenUtil.isExpired(token)) {
