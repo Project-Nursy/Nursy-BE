@@ -24,8 +24,8 @@ public class Ward {
     @OneToMany(mappedBy = "ward")
     private List<WorkSchedule> workSchedules;
 
-    @OneToOne(mappedBy = "ward")
-    private WardSetting settings;
+//    @OneToOne(mappedBy = "ward", cascade = CascadeType.ALL)
+//    private WardSetting settings;
 
     @OneToMany(mappedBy = "ward")
     private List<Holiday> holidays;
