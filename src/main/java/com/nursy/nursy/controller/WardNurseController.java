@@ -31,7 +31,6 @@ public class WardNurseController {
         System.out.println(nurseAddRequestDto);
         nurseService.saveNurse(authentication, nurseAddRequestDto);
     }
-    @Transactional
     @DeleteMapping("/remove")
     public void removeWardNurse(Authentication authentication, @RequestBody NurseRemoveRequestDto nurseRemoveRequestDto){
         nurseService.deleteNurse(authentication, nurseRemoveRequestDto);

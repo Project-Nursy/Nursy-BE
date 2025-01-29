@@ -1,9 +1,6 @@
 package com.nursy.nursy.domain.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Getter
@@ -14,9 +11,11 @@ import lombok.*;
 public class WardSetting {
     @Id
     private Long wardId;
-    @OneToOne
-    @JoinColumn(name = "ward_id")
-    private Ward ward;
+
+//    @OneToOne
+//    @MapsId // wardId를 Ward의 기본 키로 설정
+//    @JoinColumn(name = "ward_id")
+//    private Ward ward;
 
     private Long weekdayDayShift;
     private Long holidayDayShift;

@@ -7,9 +7,11 @@ import com.nursy.nursy.domain.entity.User;
 import com.nursy.nursy.domain.entity.Ward;
 import com.nursy.nursy.repository.UserRepository;
 import com.nursy.nursy.repository.WardRepository;
+import com.nursy.nursy.repository.WardSettingRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,11 +19,15 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+
 public class WardService {
     private final WardRepository wardRepository;
+    private final WardSettingRepository wardSettingRepository;
     private final UserRepository userRepository;
 
-    public void saveWard(Authentication authentication,WardAddRequestDto wardAddRequestDto) {
+
+    @Transactional
+    public Ward saveWard(Authentication authentication,WardAddRequestDto wardAddRequestDto) {
         Optional<User> userOptional = userRepository.findById(authentication.getName());//uuid
         Ward ward = Ward.builder()
                 .wardName(wardAddRequestDto.getWardName())
@@ -30,8 +36,10 @@ public class WardService {
                 .user(userOptional.get())
                 .build();
         wardRepository.save(ward);
+        return ward;
 
     }
+    @Transactional
     public void deleteWard(Authentication authentication, Long wardId) {
         Optional<User> userOptional = userRepository.findById(authentication.getName());
 
@@ -40,6 +48,7 @@ public class WardService {
             wardRepository.deleteByUserIdAndWardId(user.getId(), wardId);
         }
     }
+    @Transactional
     public void updateWard(Authentication authentication, WardUpdateRequestDto wardUpdateRequestDto) {
         Optional<User> userOptional = userRepository.findById(authentication.getName());//uuid
         Ward ward = Ward.builder()
@@ -71,5 +80,9 @@ public class WardService {
             // 예외나 빈 리스트 반환 가능
             return List.of();
         }
+    }
+    public Ward getWardById(Long wardId) {
+        Optional<Ward> wardOptional = wardRepository.findById(wardId);
+        return wardOptional.orElse(null);
     }
 }
