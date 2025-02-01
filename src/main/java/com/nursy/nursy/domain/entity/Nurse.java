@@ -44,9 +44,9 @@ public class Nurse {
 
     @OneToMany(mappedBy = "nurse")
     private List<DayOff> dayOffs;
-
-    @OneToOne(mappedBy = "nurse")
-    private WorkCount workCount;
+//
+//    @OneToOne(mappedBy = "nurse")
+//    private WorkCount workCount;
 
     @PrePersist
     public void prePersist() {
