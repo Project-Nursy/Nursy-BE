@@ -64,7 +64,7 @@ public class NurseService {
             return List.of();
         }
     }
-    public void saveNurse(Authentication authentication, NurseAddRequestDto nurseAddRequestDto) {
+    public Nurse saveNurse(Authentication authentication, NurseAddRequestDto nurseAddRequestDto) {
         Ward ward = wardRepository.findById(nurseAddRequestDto.getWardId()).get();
         Nurse nurse = Nurse.builder()
                 .name(nurseAddRequestDto.getName())
@@ -72,7 +72,7 @@ public class NurseService {
                 .team(nurseAddRequestDto.getTeam())
                 .ward(ward)
                 .build();
-        nurseRepository.save(nurse);
+        return nurseRepository.save(nurse);
 
     }
 

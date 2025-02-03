@@ -5,6 +5,7 @@ import com.nursy.nursy.domain.dto.nurse.NurseRemoveRequestDto;
 import com.nursy.nursy.domain.dto.nurse.NurseResponseDto;
 import com.nursy.nursy.domain.entity.Nurse;
 import com.nursy.nursy.service.NurseService;
+import com.nursy.nursy.service.WorkCountService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -19,6 +20,7 @@ import java.util.List;
 public class WardNurseController {
 
     private final NurseService nurseService;
+    private final WorkCountService workCountService;
 
     @GetMapping("/list/{wardId}")
     public ResponseEntity<?> getWardNurseList(Authentication authentication, @PathVariable Long wardId) {
@@ -29,11 +31,13 @@ public class WardNurseController {
     @PostMapping("/add")
     public void addWardNurse(Authentication authentication, @RequestBody NurseAddRequestDto nurseAddRequestDto) {
         System.out.println(nurseAddRequestDto);
-        nurseService.saveNurse(authentication, nurseAddRequestDto);
+        Nurse nurse = nurseService.saveNurse(authentication, nurseAddRequestDto);
+        workCountService.saveWorkCount(authentication, nurse.getNurseId());
     }
     @DeleteMapping("/remove")
     public void removeWardNurse(Authentication authentication, @RequestBody NurseRemoveRequestDto nurseRemoveRequestDto){
         nurseService.deleteNurse(authentication, nurseRemoveRequestDto);
+        workCountService.removeWorkCount(authentication, nurseRemoveRequestDto.getNurseId());
 
     }
 
