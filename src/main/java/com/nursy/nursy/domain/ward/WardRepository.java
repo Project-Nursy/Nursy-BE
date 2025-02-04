@@ -1,7 +1,6 @@
 package com.nursy.nursy.domain.ward;
 
 
-import com.nursy.nursy.domain.ward.domain.Ward;
 import jakarta.persistence.LockModeType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Lock;

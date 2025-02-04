@@ -1,6 +1,5 @@
 package com.nursy.nursy.domain.nurse;
 
-import com.nursy.nursy.domain.nurse.domain.Nurse;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

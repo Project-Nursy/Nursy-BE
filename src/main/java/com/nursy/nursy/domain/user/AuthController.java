@@ -1,9 +1,8 @@
 package com.nursy.nursy.domain.user;
 
-import com.nursy.nursy.domain.user.domain.User;
-import com.nursy.nursy.domain.user.domain.dto.join.JoinRequest;
-import com.nursy.nursy.domain.user.domain.dto.login.AccessTokenResponseDto;
-import com.nursy.nursy.domain.user.domain.dto.login.LoginRequest;
+import com.nursy.nursy.domain.user.dto.join.JoinRequest;
+import com.nursy.nursy.domain.user.dto.login.AccessTokenResponseDto;
+import com.nursy.nursy.domain.user.dto.login.LoginRequest;
 import com.nursy.nursy.global.jwt.JwtToken;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
