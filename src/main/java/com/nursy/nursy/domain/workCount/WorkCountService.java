@@ -1,6 +1,5 @@
 package com.nursy.nursy.domain.workCount;
 
-import com.nursy.nursy.domain.workCount.domain.WorkCount;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;

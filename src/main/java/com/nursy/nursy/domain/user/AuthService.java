@@ -1,8 +1,7 @@
 package com.nursy.nursy.domain.user;
 
-import com.nursy.nursy.domain.user.domain.User;
-import com.nursy.nursy.domain.user.domain.dto.join.JoinRequest;
-import com.nursy.nursy.domain.user.domain.dto.login.LoginRequest;
+import com.nursy.nursy.domain.user.dto.join.JoinRequest;
+import com.nursy.nursy.domain.user.dto.login.LoginRequest;
 import com.nursy.nursy.global.jwt.JwtToken;
 import com.nursy.nursy.global.jwt.JwtTokenUtil;
 import lombok.RequiredArgsConstructor;

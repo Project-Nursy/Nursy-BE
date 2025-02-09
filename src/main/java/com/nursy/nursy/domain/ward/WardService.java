@@ -1,10 +1,9 @@
 package com.nursy.nursy.domain.ward;
 
-import com.nursy.nursy.domain.ward.domain.Ward;
-import com.nursy.nursy.domain.ward.domain.dto.WardAddRequestDto;
-import com.nursy.nursy.domain.ward.domain.dto.WardResponseDto;
-import com.nursy.nursy.domain.ward.domain.dto.WardUpdateRequestDto;
-import com.nursy.nursy.domain.user.domain.User;
+import com.nursy.nursy.domain.ward.dto.WardAddRequestDto;
+import com.nursy.nursy.domain.ward.dto.WardResponseDto;
+import com.nursy.nursy.domain.ward.dto.WardUpdateRequestDto;
+import com.nursy.nursy.domain.user.User;
 import com.nursy.nursy.domain.user.UserRepository;
 import com.nursy.nursy.domain.wardSetting.WardSettingRepository;
 import lombok.RequiredArgsConstructor;

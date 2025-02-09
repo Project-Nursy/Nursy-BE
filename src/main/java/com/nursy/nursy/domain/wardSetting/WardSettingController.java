@@ -1,7 +1,7 @@
 package com.nursy.nursy.domain.wardSetting;
 
-import com.nursy.nursy.domain.wardSetting.domain.dto.SettingResponseDto;
-import com.nursy.nursy.domain.wardSetting.domain.dto.SettingUpdateRequestDto;
+import com.nursy.nursy.domain.wardSetting.dto.SettingResponseDto;
+import com.nursy.nursy.domain.wardSetting.dto.SettingUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;

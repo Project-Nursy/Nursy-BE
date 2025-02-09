@@ -1,9 +1,8 @@
 package com.nursy.nursy.domain.nurse;
 
-import com.nursy.nursy.domain.nurse.domain.dto.NurseAddRequestDto;
-import com.nursy.nursy.domain.nurse.domain.dto.NurseRemoveRequestDto;
-import com.nursy.nursy.domain.nurse.domain.dto.NurseResponseDto;
-import com.nursy.nursy.domain.nurse.domain.Nurse;
+import com.nursy.nursy.domain.nurse.dto.NurseAddRequestDto;
+import com.nursy.nursy.domain.nurse.dto.NurseRemoveRequestDto;
+import com.nursy.nursy.domain.nurse.dto.NurseResponseDto;
 import com.nursy.nursy.domain.workCount.WorkCountService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

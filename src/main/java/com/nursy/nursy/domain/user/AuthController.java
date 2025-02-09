@@ -1,9 +1,8 @@
 package com.nursy.nursy.domain.user;
 
-import com.nursy.nursy.domain.user.domain.User;
-import com.nursy.nursy.domain.user.domain.dto.join.JoinRequest;
-import com.nursy.nursy.domain.user.domain.dto.login.AccessTokenResponseDto;
-import com.nursy.nursy.domain.user.domain.dto.login.LoginRequest;
+import com.nursy.nursy.domain.user.dto.join.JoinRequest;
+import com.nursy.nursy.domain.user.dto.login.AccessTokenResponseDto;
+import com.nursy.nursy.domain.user.dto.login.LoginRequest;
 import com.nursy.nursy.global.jwt.JwtToken;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -37,9 +36,6 @@ public class AuthController {
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
         JwtToken jwtToken = authService.login(loginRequest);
         if(jwtToken==null){
-            //Map<String, String> response = new HashMap<>();
-            //response.put("error", "Invalid username or password");
-            //return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("아이디및 비밀번호를 체크해주세요");
         }
         AccessTokenResponseDto accessTokenResponseDto = new AccessTokenResponseDto();
@@ -55,7 +51,6 @@ public class AuthController {
                 .header(HttpHeaders.SET_COOKIE, refreshCookie.toString())
                 .body(accessTokenResponseDto);
 
-        //return ResponseEntity.status(200).body(jwtToken);
     }
     @PostMapping("/logout")
     public ResponseEntity<?> logout(HttpServletResponse response) {

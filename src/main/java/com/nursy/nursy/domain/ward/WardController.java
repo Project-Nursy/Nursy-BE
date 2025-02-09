@@ -1,9 +1,8 @@
 package com.nursy.nursy.domain.ward;
 
-import com.nursy.nursy.domain.ward.domain.Ward;
-import com.nursy.nursy.domain.ward.domain.dto.WardAddRequestDto;
-import com.nursy.nursy.domain.ward.domain.dto.WardResponseDto;
-import com.nursy.nursy.domain.ward.domain.dto.WardUpdateRequestDto;
+import com.nursy.nursy.domain.ward.dto.WardAddRequestDto;
+import com.nursy.nursy.domain.ward.dto.WardResponseDto;
+import com.nursy.nursy.domain.ward.dto.WardUpdateRequestDto;
 import com.nursy.nursy.domain.wardSetting.WardSettingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
