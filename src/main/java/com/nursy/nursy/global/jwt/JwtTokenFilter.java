@@ -47,12 +47,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
                     String newAccessToken = jwtTokenUtil.createAccessToken(userId,userName,role);
                     setJsonResponseWithNewToken(response, newAccessToken);
 
-//                    response.setHeader("Authorization", "Bearer " + newAccessToken);
-//                    response.getWriter().write("Authorization"+" "+ "Bearer " + newAccessToken);
-
                 } else {
-//                    response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-//                    response.getWriter().write("JWT token and refresh token are expired.");
                     setErrorResponse(response, HttpServletResponse.SC_UNAUTHORIZED, "Invalid or expired token");
                     return;
                 }
@@ -60,8 +55,6 @@ public class JwtTokenFilter extends OncePerRequestFilter {
                 String userId = jwtTokenUtil.getUserId(token);
                 String userRole = jwtTokenUtil.getUserRole(token);
                 String userName = jwtTokenUtil.getUserName(token);
-
-                //UserDetails userDetails = userDetailsService.loadUserByUsername(userId);
 
                 UserDetails userDetails = new CustomUserDetails(userId,userName);
                 UsernamePasswordAuthenticationToken authenticationToken =

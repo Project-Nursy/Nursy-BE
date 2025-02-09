@@ -36,9 +36,6 @@ public class AuthController {
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
         JwtToken jwtToken = authService.login(loginRequest);
         if(jwtToken==null){
-            //Map<String, String> response = new HashMap<>();
-            //response.put("error", "Invalid username or password");
-            //return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("아이디및 비밀번호를 체크해주세요");
         }
         AccessTokenResponseDto accessTokenResponseDto = new AccessTokenResponseDto();
@@ -54,7 +51,6 @@ public class AuthController {
                 .header(HttpHeaders.SET_COOKIE, refreshCookie.toString())
                 .body(accessTokenResponseDto);
 
-        //return ResponseEntity.status(200).body(jwtToken);
     }
     @PostMapping("/logout")
     public ResponseEntity<?> logout(HttpServletResponse response) {

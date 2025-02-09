@@ -12,11 +12,6 @@ public class WardSetting {
     @Id
     private Long wardId;
 
-//    @OneToOne
-//    @MapsId // wardId를 Ward의 기본 키로 설정
-//    @JoinColumn(name = "ward_id")
-//    private Ward ward;
-
     private Long weekdayDayShift;
     private Long holidayDayShift;
     private Long weekdayEveningShift;
