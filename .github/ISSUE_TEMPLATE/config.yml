@@ -1,0 +1,16 @@
+blank_issues_enabled: false  # 빈 이슈 생성을 막고 템플릿만 사용하도록 설정
+
+issue_templates:
+  - name: "🐞 Bug Report"
+    description: "버그를 신고할 때 사용하는 템플릿입니다."
+    title: "[Bug]: "
+    labels: ["bug"]
+    assignees: []
+    body: bug_report.md  # ✅ MD 템플릿 파일 이름과 일치해야 함
+
+  - name: "✨ Feature Request"
+    description: "새로운 기능을 제안할 때 사용하는 템플릿입니다."
+    title: "[Feature]: "
+    labels: ["enhancement"]
+    assignees: []
+    body: feature_request.md  # ✅ MD 템플릿 파일 이름과 일치해야 함
