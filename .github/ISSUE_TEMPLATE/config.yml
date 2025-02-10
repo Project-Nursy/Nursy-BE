@@ -14,3 +14,9 @@ issue_templates:
     labels: ["enhancement"]
     assignees: []
     body: feature_request.md  # ✅ MD 템플릿 파일 이름과 일치해야 함
+
+  - name: "📝 General Task"
+    description: "설명 + Todo 리스트가 포함된 기본 이슈 템플릿입니다."
+    title: "[Task]: "
+    labels: ["task"]
+    body: description_todo.md
