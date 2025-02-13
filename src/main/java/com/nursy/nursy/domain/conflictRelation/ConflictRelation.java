@@ -16,11 +16,11 @@ public class ConflictRelation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "nurse_id")
     private Nurse nurse;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "opposite_id")
     private Nurse oppositeNurse;
 
