@@ -9,5 +9,5 @@ public interface NurseRepository extends JpaRepository<Nurse, Long> {
 
     Optional<List<Nurse>> findByWard_WardId(Long wardId);
 
-    void deleteByNurseIdAndWard_WardId(Long nurseId, Long wardWardId);
+    long deleteByNurseIdAndWard_WardId(Long nurseId, Long wardWardId);
 }
